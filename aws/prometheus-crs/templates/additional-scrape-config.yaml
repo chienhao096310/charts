@@ -5,15 +5,16 @@ metadata:
   namespace: kube-prometheus-stack
 stringData:
   prometheus-additional: |
-    - job_name: {{ .Values.prometheus.additionalScrapeConfig.jobName }}
+    {{- $json := .Values.additionalScrapeConfig | fromJson }}
+    - job_name: {{ $json.jobName }}
       metrics_path: "/federate"
       params:
         "match[]":
-          {{- range .Values.prometheus.additionalScrapeConfig.matchers}}
+          {{- range $json.matchers}}
           - {{ . | quote }}
           {{- end }}
       static_configs:
         - targets:
-          {{- range .Values.prometheus.additionalScrapeConfig.targets }}
+          {{- range $json.targets }}
           - {{ . | quote }}
           {{- end }}
