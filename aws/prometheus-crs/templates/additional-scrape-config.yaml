@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: additional-scrape-configs
+  namespace: kube-prometheus-stack
+stringData:
+  prometheus-additional: |
+    - job_name: {{ .Values.prometheus.additionalScrapeConfig.jobName }}
+      metrics_path: "/federate"
+      params:
+        "match[]":
+          {{- range .Values.prometheus.additionalScrapeConfig.matchers}}
+          - {{ . | quote }}
+          {{- end }}
+      static_configs:
+        - targets:
+          {{- range .Values.prometheus.additionalScrapeConfig.targets }}
+          - {{ . | quote }}
+          {{- end }}

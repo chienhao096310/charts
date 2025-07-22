@@ -1,0 +1,6 @@
+prometheus:
+  additionalScrapeConfig:
+    jobName: "prometheus"
+    matchers:
+      - '{job="apiserver"}'
+    targets: []
