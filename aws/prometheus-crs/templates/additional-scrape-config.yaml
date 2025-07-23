@@ -4,7 +4,7 @@ metadata:
   name: additional-scrape-configs
   namespace: kube-prometheus-stack
 stringData: |
-  prometheus-additional:
+  prometheus-additional: |
   - job_name: {{ .Values.additionalScrapeConfig.jobName }}
     metrics_path: "/federate"
     params:
