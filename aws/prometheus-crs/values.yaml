@@ -1,8 +1,0 @@
-# prometheus:
-#   additionalScrapeConfig:
-#     jobName: "prometheus"
-#     matchers:
-#       - '{job="apiserver"}'
-#     targets: []
-
-additionalScrapeConfig: "{\"jobName\":\"prometheus\",\"matchers\":[\"{job=\\\"apiserver\\\"}\"],\"targets\":[\"ch2.techmuc-valiton.com\"]}"
