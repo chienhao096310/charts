@@ -6,6 +6,7 @@ metadata:
 stringData: |
   {{- $json := .Values.additionalScrapeConfig | fromJson }}
   prometheus-additional:
+
   - job_name: {{ $json.jobName }}
     metrics_path: "/federate"
     params:
