@@ -4,18 +4,16 @@ metadata:
   name: additional-scrape-configs
   namespace: kube-prometheus-stack
 stringData: |
-  {{- $json := .Values.additionalScrapeConfig | fromJson }}
   prometheus-additional:
-
-  - job_name: {{ $json.jobName }}
+  - job_name: {{ .Values.additionalScrapeConfig.jobName }}
     metrics_path: "/federate"
     params:
       "match[]":
-        {{- range $json.matchers }}
+        {{- range .Values.additionalScrapeConfig.matchers }}
         - {{ . | quote }}
         {{- end }}
     static_configs:
       - targets:
-        {{- range $json.targets }}
+        {{- range .Values.additionalScrapeConfig.targets }}
         - {{ . | quote }}
         {{- end }}
